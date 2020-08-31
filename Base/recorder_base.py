@@ -9,4 +9,8 @@ class recorder_base():
     def Flush(self):
         pass
 
+    #envent started
+    #event stopted
+
+
 
