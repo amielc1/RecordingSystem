@@ -1,0 +1,6 @@
+<LogRecorder>
+    <SourceFolder>App/Current/Local</SourceFolder>
+    <LogFileType>*</LogFileType>
+    <DestinationFolder>App/Current/Local/More</DestinationFolder>
+    <RecordFrequency>6</RecordFrequency>
+</LogRecorder>
