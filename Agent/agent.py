@@ -5,6 +5,36 @@ from datetime import datetime
 from pathlib import Path
 from threading import Timer
 
+import yaml
+
+
+class LogRecorderConfig:
+
+    def __init__(self):
+        self.source = ""
+        self.destination = ""
+        self.interval = ""
+
+    def create(self, filename):
+        with open(filename) as f:
+            data = yaml.load(f, Loader=yaml.FullLoader)
+            logrecorder = data['log_recorder']
+            lig = {}
+            for rec in logrecorder:
+                print(rec)
+                lig[rec]
+            # self.source = logrecorder[0]['source']
+            # self.destination = logrecorder[1]['destination']
+            # self.interval = logrecorder[2]['interval']
+
+
+l = LogRecorderConfig()
+l.create("recorder.yaml")
+print(l.destination)
+print(l.interval)
+print(l.source)
+input()
+
 
 class RepeatedTimer(object):
     def __init__(self, interval, function, *args, **kwargs):
