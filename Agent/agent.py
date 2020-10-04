@@ -19,10 +19,13 @@ class LogRecorderConfig:
         with open(filename) as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
             logrecorder = data['log_recorder']
-            lig = {}
+            log_rec_dic={}
             for rec in logrecorder:
-                print(rec)
-                lig[rec]
+                for key in rec:
+                    print(f"{key} : {rec[key]}")
+                    log_rec_dic[key]=rec[key]
+        print(log_rec_dic)
+
             # self.source = logrecorder[0]['source']
             # self.destination = logrecorder[1]['destination']
             # self.interval = logrecorder[2]['interval']
