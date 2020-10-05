@@ -4,6 +4,7 @@ import shutil
 from datetime import datetime
 from pathlib import Path
 from threading import Timer
+from xmlrpc.server import SimpleXMLRPCServer
 
 import yaml
 
@@ -19,24 +20,24 @@ class LogRecorderConfig:
         with open(filename) as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
             logrecorder = data['log_recorder']
-            log_rec_dic={}
+            log_rec_dic = {}
             for rec in logrecorder:
                 for key in rec:
                     print(f"{key} : {rec[key]}")
-                    log_rec_dic[key]=rec[key]
+                    log_rec_dic[key] = rec[key]
         print(log_rec_dic)
 
-            # self.source = logrecorder[0]['source']
-            # self.destination = logrecorder[1]['destination']
-            # self.interval = logrecorder[2]['interval']
+        # self.source = logrecorder[0]['source']
+        # self.destination = logrecorder[1]['destination']
+        # self.interval = logrecorder[2]['interval']
 
 
-l = LogRecorderConfig()
-l.create("recorder.yaml")
-print(l.destination)
-print(l.interval)
-print(l.source)
-input()
+# l = LogRecorderConfig()
+# l.create("recorder.yaml")
+# print(l.destination)
+# print(l.interval)
+# print(l.source)
+# input()
 
 
 class RepeatedTimer(object):
@@ -110,11 +111,15 @@ class Agent:
 
     def __init__(self):
         self.recorders = []
+        self.server = SimpleXMLRPCServer(('localhost', 9000), allow_none=True)
 
     def init_recorders(self, recorders: list):
         self.recorders = recorders
+        self.server.register_function(self.start)
+        self.server.serve_forever()
 
     def start(self):
+        print("start agent")
         for recorder in self.recorders:
             recorder.start()
 
@@ -129,6 +134,6 @@ log_writer = LogWriter(current_dir, 2, "Applog.log")
 recorders = [log_writer, log_recorder]
 agent = Agent()
 agent.init_recorders(recorders)
-agent.start()
-input("type to stop")
-agent.stop()
+# agent.start()
+# input("type to stop")
+# agent.stop()
