@@ -1,19 +1,17 @@
-# Press the green button in the gutter to run the script.
-import glob
-import os
-import shutil
-from mss import mss
+from xmlrpc.server import SimpleXMLRPCServer
 
-if __name__ == '__main__':
-    print("hi")
-    src  = "BaseRecorder"
-    dest = "ScreenRecoder"
-    src_files = os.listdir(src)
-    print(src_files)
-    for file_name in src_files:
-        full_file_name = os.path.join(src, file_name)
-        if os.path.isfile(full_file_name):
-            shutil.copy(full_file_name, dest)
+server = SimpleXMLRPCServer(('localhost', 9000))
 
 
+# Expose a function
+def list_contents(dir_name):
+    return dir_name
 
+
+server.register_function(list_contents)
+
+try:
+    print('Use Control-C to exit')
+    server.serve_forever()
+except KeyboardInterrupt:
+    print('Exiting')
