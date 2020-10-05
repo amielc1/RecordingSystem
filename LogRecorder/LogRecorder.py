@@ -1,21 +1,24 @@
-import yaml
+import glob
+import os
+import shutil
 
-with open('../Agent/recorder.yaml') as f:
-    # use safe_load instead load
-    dataMap = yaml.safe_load(f)
-    mymap = yaml.dump(yaml.load(f))
-    a = 1
+from Utils import RepeatedTimer as rt
 
-# from base_recorder import recorder_base
-#
-#
-# class LogRecorder(recorder_base):
-#
-#     def __init__(self):
-#         recorder_base.__init__()
-#
-#     def copy_files(self, src_dir):
-#         recorder_base.start_record()
-#
-#     def start_record(self):
-#         recorder_base.start_record()
+
+class LogRecorder:
+
+    def __init__(self, source, destination, interval):
+        self.source = source
+        self.destination = destination
+        self.interval = interval
+        self.timer = rt.RepeatedTimer(3, self.copy_logs)
+
+    def start(self):
+        self.timer.start()
+
+    def stop(self):
+        self.timer.stop()
+
+    def copy_logs(self):
+        for filename in glob.glob(os.path.join(self.source, '*.log')):
+            shutil.copy(filename, self.destination)
