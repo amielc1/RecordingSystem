@@ -57,7 +57,7 @@ host, port = '127.0.0.1', 22
 transport = paramiko.Transport((host, port))
 
 # Auth
-username, password = "Me", "sale1sm6qt592"
+username, password = "Me", ""
 transport.connect(None, username, password)
 
 # Go!
