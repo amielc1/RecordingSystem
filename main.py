@@ -13,6 +13,5 @@ recorders = [log_writer, log_recorder]
 agent = agnt.Agent()
 agent.init_recorders(recorders)
 api_server.register_function(agent.start)
-input("type to stop")
+api_server.register_function(agent.stop)
 api_server.start_listen()
-agent.stop()

@@ -25,7 +25,7 @@ transport.connect(None, username, password)
 # Go!
 sftp = paramiko.SFTPClient.from_transport(transport)
 
-log_dir = 'Downloads\log_files_dir'
+log_dir = 'c:/tmp'
 file_list = sftp.listdir(path=log_dir)
 print(file_list)
 for file in file_list:
