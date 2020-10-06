@@ -4,6 +4,44 @@ from stat import S_ISDIR
 import paramiko
 
 
+class get_remote_files_config:
+
+    def __init__(self, ip: str, port: int, username: str, password: str):
+        self.ip = ip
+        self.port = port
+        self.username = username
+        self.password = password
+
+
+class get_remote_files:
+
+    def __init__(self, config: get_remote_files_config):
+        self.config = config
+        self.transport: paramiko.Transport
+        self.sftp: paramiko.SFTPClient
+
+    def connect(self):
+        self.transport = paramiko.Transport((self.config.ip, self.config.port))
+        self.transport.connect(None, self.config.username, self.config.password)
+        self.sftp = paramiko.SFTPClient.from_transport(transport)
+
+    def isdir(path):
+        try:
+            return S_ISDIR(sftp.stat(path).st_mode)
+        except IOError:
+            # Path does not exist, so by definition not a directory
+            return False
+
+    def get_files(self, src: str, dst: str):
+        file_list = sftp.listdir(path=src)
+        for file in file_list:
+            self.sftp.get(os.path.join(src, file), os.path.join(dst, file))
+
+    def close(self):
+        if self.sftp: self.sftp.close()
+        if self.transport: self.transport.close()
+
+
 def isdir(path):
     try:
         return S_ISDIR(sftp.stat(path).st_mode)
@@ -19,7 +57,7 @@ host, port = '127.0.0.1', 22
 transport = paramiko.Transport((host, port))
 
 # Auth
-username, password = "Me", ""
+username, password = "Me", "sale1sm6qt592"
 transport.connect(None, username, password)
 
 # Go!
