@@ -4,9 +4,9 @@ import yaml
 class LogRecorderConfig:
 
     def __init__(self):
-        self.source = ""
-        self.destination = ""
-        self.interval = ""
+        self.source: str
+        self.destination: str
+        self.interval: int
 
     def create(self, filename):
         with open(filename) as f:

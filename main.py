@@ -7,7 +7,7 @@ from LogWriter import LogWriter
 
 api_server = ras.RemoteAPIServer('127.0.0.1', 9000)
 current_dir = Path().absolute()
-log_recorder = LogRecorder(current_dir, "c:/tmp", 2)
+log_recorder = LogRecorder(current_dir, "c:/tmp", 2, '*.log')
 log_writer = LogWriter(current_dir, 2, "Applog.log")
 recorders = [log_writer, log_recorder]
 agent = agnt.Agent()
