@@ -1,27 +1,24 @@
 import yaml
 
 
-class LogRecorderConfig:
+class LogWriterConfig:
 
     def __init__(self):
-        self.source: str
         self.destination: str
         self.interval: int
-        self.extension: str
+        self.filename: str
 
     def parse(self, filename):
         with open(filename) as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
             log_rec_dic = {}
-            for rec in data['log_recorder']:
+            for rec in data['log_writer']:
                 log_rec_dic.update(rec)
-            self.source = log_rec_dic['source']
+            self.filename = log_rec_dic['filename']
             self.destination = log_rec_dic['destination']
             self.interval = log_rec_dic['interval']
-            self.extension = log_rec_dic['extension']
 
-#
-# l = LogRecorderConfig()
+# l = LogWriterConfig()
 # l.parse("recorder.yaml")
-# print(l.source)
-# print(l.extension)
+# print(l.destination)
+# print(l.filename)

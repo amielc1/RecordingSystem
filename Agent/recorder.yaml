@@ -1,4 +1,0 @@
-log_recorder:
-  - source: "c:/src"
-  - destination: "c:/dest"
-  - interval: "2"

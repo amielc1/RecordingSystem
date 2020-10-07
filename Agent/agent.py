@@ -1,17 +1,14 @@
-
 class Agent:
-
-    def __init__(self):
-        self.recorders = []
-
-    def init_recorders(self, recorders: list):
+    def __init__(self, recorders: list):
         self.recorders = recorders
 
     def start(self):
         print("start agent")
-        for recorder in self.recorders:
-            recorder.start()
+        self.invoke_on_all_recorders('start')
 
     def stop(self):
+        self.invoke_on_all_recorders('stop')
+
+    def invoke_on_all_recorders(self, method_name: str, *args):
         for recorder in self.recorders:
-            recorder.stop()
+            getattr(recorder, method_name)(*args)
