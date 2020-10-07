@@ -1,0 +1,5 @@
+get_remote_files:
+  - ip: " str"
+  - port: "int"
+  - username: "str"
+  - password: "pass"
