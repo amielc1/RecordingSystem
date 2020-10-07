@@ -1,22 +1,21 @@
 import glob
+import os
+import shutil
 from pathlib import Path
 
 from LogRecorder import LogRecorder
 
 
 def test_copy_logs_pass():
+    # arrange
     current_dir = Path().absolute()
-    dest_file = "c:/tmp"
+    dest_file = os.path.join(Path().absolute(), 'out')
     extn = '*.*'
+    if os.path.isdir(dest_file):
+        shutil.rmtree(dest_file)
+    # act
     log_recorder = LogRecorder(current_dir, dest_file, 2, extn)
     log_recorder.copy_logs()
-    lst = [filename for filename in glob.glob(os.path.join(dest_file, extn))]
-    for item in lst:
-        assert "LogRecorder" in item
-
-
-def test_cpy_files1():
-    assert len('fff') < 1
-
-
-test_copy_logs_pass()
+    # assert
+    matching = [s for s in glob.glob(os.path.join(dest_file, extn)) if "test_log_record" in s]
+    assert len(matching) > 0

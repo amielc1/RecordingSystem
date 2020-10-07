@@ -21,5 +21,7 @@ class LogRecorder:
         self.timer.stop()
 
     def copy_logs(self):
+        if not os.path.isdir(self.destination):
+            os.mkdir(self.destination)
         for filename in glob.glob(os.path.join(self.source, self.extension)):
             shutil.copy(filename, self.destination)
