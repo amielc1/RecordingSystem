@@ -15,7 +15,7 @@ class get_remote_files_config:
             log_dic = {}
             for rec in data['get_remote_files']:
                 log_dic.update(rec)
-                self.ip = log_dic['ip']
-                self.port = log_dic['port']
-                self.username = log_dic['username']
-                self.password = log_dic['password']
+            self.ip = log_dic['ip']
+            self.port = log_dic['port']
+            self.username = log_dic['username']
+            self.password = log_dic['password']

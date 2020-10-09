@@ -3,7 +3,7 @@ from stat import S_ISDIR
 
 import paramiko
 
-from get_remote_files_config import get_remote_files_config
+from Config.get_remote_files_config import get_remote_files_config
 
 
 class get_remote_files:
@@ -27,6 +27,9 @@ class get_remote_files:
 
     def get_files(self, src: str, dst: str):
         file_list = self.sftp.listdir(path=src)
+        if len(file_list):
+            if not os.path.isdir(dst):
+                os.mkdir(dst)
         for file in file_list:
             self.sftp.get(os.path.join(src, file), os.path.join(dst, file))
 
@@ -37,7 +40,8 @@ class get_remote_files:
             self.transport.close()
 
 
-remote_config = get_remote_files_config().parse('server.yaml')
+remote_config = get_remote_files_config()
+remote_config.parse('../Config/server.yml')
 remote = get_remote_files(remote_config)
 remote.connect()
-remote.get_files()
+remote.get_files('/C:/Users/Me/Downloads/log_files_dir', 'C:/TempA')

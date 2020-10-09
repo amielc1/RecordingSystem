@@ -1,0 +1,5 @@
+get_remote_files:
+  - ip: "127.0.0.1"
+  - port: 22
+  - username: "Me"
+  - password: ""

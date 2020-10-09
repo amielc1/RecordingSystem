@@ -2,8 +2,8 @@ from pathlib import Path
 
 import Agent.agent as agnt
 from Agent import RemoteAPIServer as ras
-from LogRecorder import LogRecorder
-from LogWriter import LogWriter
+from Recorders.LogRecorder import LogRecorder
+from Recorders.LogWriter import LogWriter
 
 api_server = ras.RemoteAPIServer('127.0.0.1', 9000)
 current_dir = Path().absolute()

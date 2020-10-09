@@ -20,8 +20,7 @@ class LogRecorderConfig:
             self.interval = log_rec_dic['interval']
             self.extension = log_rec_dic['extension']
 
-#
 # l = LogRecorderConfig()
-# l.parse("recorder.yaml")
+# l.parse("recorder.yml")
 # print(l.source)
 # print(l.extension)

@@ -19,6 +19,6 @@ class LogWriterConfig:
             self.interval = log_rec_dic['interval']
 
 # l = LogWriterConfig()
-# l.parse("recorder.yaml")
+# l.parse('recorder.yml')
 # print(l.destination)
 # print(l.filename)

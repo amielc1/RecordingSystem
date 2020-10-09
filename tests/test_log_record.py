@@ -2,10 +2,10 @@ import glob
 import os
 from pathlib import Path
 
-from LogRecorder.LogRecorder import LogRecorder
+from Recorders.LogRecorder import LogRecorder
 
 
-def test_copy_logs_pass(tmpdir_factory):
+def test_logRecorder_copy_logs_pass(tmpdir_factory):
     # arrange
     src = Path().absolute()
     dst = tmpdir_factory.mktemp("dst")
@@ -18,7 +18,7 @@ def test_copy_logs_pass(tmpdir_factory):
     assert len(matching) > 0
 
 
-def test_copy_logs_by_extention_pass(tmpdir_factory):
+def test_logRecorder_copy_logs_by_extention_pass(tmpdir_factory):
     # arrange
     src = Path().absolute()
     dst = tmpdir_factory.mktemp("dst")
