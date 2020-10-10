@@ -35,17 +35,16 @@ def test_logRecorder_copy_logs_by_extention_pass(tmpdir_factory):
     matching = [s for s in glob.glob(os.path.join(dst, extn)) if my_file_name in s]
     assert len(matching) == 0
 
-
-def write_to_log():
-    src = tmpdir_factory.mktemp("src")
-
-
-def test_logRecorder_start_record(tmpdir_factory):
-    # the recorder should to collect files periodically.
-    # arrange
-    src = tmpdir_factory.mktemp("src")
-
-    # act
-    log_recorder = LogRecorder(src, dst, 2, extn)
-    log_recorder.start()
-    # assert
+# def write_to_log():
+#     src = tmpdir_factory.mktemp("src")
+#
+#
+# def test_logRecorder_start_record(tmpdir_factory):
+#     # the recorder should to collect files periodically.
+#     # arrange
+#     src = tmpdir_factory.mktemp("src")
+#
+#     # act
+#     log_recorder = LogRecorder(src, dst, 2, extn)
+#     log_recorder.start()
+#     # assert
