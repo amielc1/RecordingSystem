@@ -3,12 +3,12 @@ from stat import S_ISDIR
 
 import paramiko
 
-from Config.get_remote_files_config import get_remote_files_config
+from Config.get_remote_files_config import Get_remote_files_config
 
 
 class get_remote_files:
 
-    def __init__(self, config: get_remote_files_config):
+    def __init__(self, config: Get_remote_files_config):
         self.config = config
         self.transport: paramiko.Transport
         self.sftp: paramiko.SFTPClient
@@ -39,9 +39,8 @@ class get_remote_files:
         if self.transport:
             self.transport.close()
 
-
-remote_config = get_remote_files_config()
-remote_config.parse('../Config/server.yml')
-remote = get_remote_files(remote_config)
-remote.connect()
-remote.get_files('/C:/Users/Me/Downloads/log_files_dir', 'C:/TempA')
+# remote_config = get_remote_files_config()
+# remote_config.parse('../Config/server.yml')
+# remote = get_remote_files(remote_config)
+# remote.connect()
+# remote.get_files('/C:/Users/Me/Downloads/log_files_dir', 'C:/TempA')
