@@ -1,16 +1,37 @@
-from pathlib import Path
+import logging
 
-import Agent.agent as agnt
-from Agent import RemoteAPIServer as ras
+from Agent.RemoteAPIServer import RemoteAPIServer
+from Agent.agent import Agent
+from Config.LogRecorderConfig import LogRecorderConfig
+from Config.LogWriterConfig import LogWriterConfig
+from Config.remote_api_config import Remote_api_config
 from Recorders.LogRecorder import LogRecorder
 from Recorders.LogWriter import LogWriter
 
-api_server = ras.RemoteAPIServer('127.0.0.1', 9000)
-current_dir = Path().absolute()
-log_recorder = LogRecorder(current_dir, "c:/tmp", 2, '*.log')
-log_writer = LogWriter(current_dir, 2, "Applog.log")
+logging.StreamHandler()
+
+remote_api_cfg = Remote_api_config()
+remote_api_cfg.parse("Config/server.yml")
+logging.info("remote_api_cfg Done! ")
+
+log_recorder_cfg = LogRecorderConfig()
+log_recorder_cfg.parse('Config/recorder.yml')
+logging.info("log_recorder_cfg Done! ")
+
+log_writer_cfg = LogWriterConfig()
+log_writer_cfg.parse('Config/recorder.yml')
+logging.info("log_writer_cfg Done! ")
+
+api_server = RemoteAPIServer(remote_api_cfg.ip, remote_api_cfg.port)
+logging.info("Create RemoteAPIServer")
+log_recorder = LogRecorder(log_recorder_cfg.source, log_recorder_cfg.destination, log_recorder_cfg.interval,
+                           log_recorder_cfg.extension)
+logging.info("Create LogRecorder")
+log_writer = LogWriter(log_writer_cfg.destination, log_writer_cfg.interval, log_writer_cfg.filename)
+logging.info("Create LogWriter")
 recorders = [log_writer, log_recorder]
-agent = agnt.Agent(recorders)
+agent = Agent("Main Agent", recorders)
+
 api_server.register_function(agent.start)
 api_server.register_function(agent.stop)
 api_server.start_listen()

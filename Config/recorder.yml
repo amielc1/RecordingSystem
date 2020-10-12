@@ -1,10 +1,10 @@
 log_recorder:
-  - source: "c:/src"
+  - source: "C:/TempA"
   - destination: "c:/dest"
   - interval: "2"
   - extension: "*.log"
 
 log_writer:
-  - destination: "sss"
+  - destination: "c:/dest"
   - interval: "2"
-  - filename: "eee.txt"
+  - filename: "log_writer.txt"
