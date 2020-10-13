@@ -15,22 +15,14 @@
 
 <div class="container">
     <h2>Recording System</h2>
-    <p></p>
+
     <div class="row">
         <div class="col-4">
             <h2>Agent List</h2>
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Agent-1
-                    <span class="badge badge-primary badge-pill">3</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Agent-2
-                    <span class="badge badge-primary badge-pill">1</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Agent-3
-                    <span class="badge badge-primary badge-pill">1</span>
+                    {{agent_name}}
+                    <span class="badge badge-primary badge-pill">{{recorders_num}}</span>
                 </li>
             </ul>
         </div>
@@ -46,24 +38,17 @@
                 </tr>
                 </thead>
                 <tbody>
+                {% for item in recorders %}
                 <tr class="list-group-item-success">
-                    <th scope="row">1</th>
-                    <td>Logs Recorder</td>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{item.name}}</td>
                     <td>Working</td>
                     <td>
                         <button class="btn btn-success" type="button">Start</button>
                         <button class="btn btn-danger" type="button">Stop</button>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Screen Recorder</td>
-                    <td>Stoped</td>
-                    <td>
-                        <button class="btn btn-success" type="button">Start</button>
-                        <button class="btn btn-danger" type="button">Stop</button>
-                    </td>
-                </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>

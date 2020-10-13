@@ -5,11 +5,12 @@ from Utils import RepeatedTimer as rt
 
 
 class LogWriter:
-    def __init__(self, destination, interval, filename):
+    def __init__(self, destination, interval, filename, name: str):
         self.destination = destination
         self.interval = interval
         self.filename = filename
         self.timer = rt.RepeatedTimer(1, self.write_log)
+        self.name = name
 
     def start(self):
         self.timer.start()

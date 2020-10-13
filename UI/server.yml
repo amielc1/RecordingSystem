@@ -1,0 +1,9 @@
+get_remote_files_config:
+  - ip: "127.0.0.1"
+  - port: 22
+  - username: "Me"
+  - password: ""
+
+remote_api_config:
+  - ip: "127.0.0.1"
+  - port: 9000
