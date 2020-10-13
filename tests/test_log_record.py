@@ -13,7 +13,7 @@ def test_logRecorder_copy_logs_pass(tmpdir_factory):
     p = src.join(my_file_name)
     p.write("content")
     # act
-    log_recorder = LogRecorder(src, dst, 2, extn)
+    log_recorder = LogRecorder(src, dst, 2, extn, "LogRecorder")
     log_recorder.copy_logs()
     # assert
     matching = [s for s in glob.glob(os.path.join(dst, extn)) if my_file_name in s]
@@ -29,7 +29,7 @@ def test_logRecorder_copy_logs_by_extention_pass(tmpdir_factory):
     p = src.join(my_file_name)
     p.write("content")
     # act
-    log_recorder = LogRecorder(src, dst, 2, extn)
+    log_recorder = LogRecorder(src, dst, 2, extn, "LogRecorder")
     log_recorder.copy_logs()
     # assert
     matching = [s for s in glob.glob(os.path.join(dst, extn)) if my_file_name in s]
