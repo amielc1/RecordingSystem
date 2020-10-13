@@ -35,7 +35,7 @@ def create_agent() -> Agent:
 @app.route('/')
 def index():
     agent = create_agent()
-    return render_template('index.html', agent_name=agent.name, recorders_num=len(agent.recorders),
+    return render_template('index.html', agent_name=agent.name,
                            recorders=agent.recorders)
 
 
