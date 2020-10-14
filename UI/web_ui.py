@@ -31,12 +31,22 @@ def create_agent() -> Agent:
     return agent
 
 
-# methods=['POST', 'GET']
 @app.route('/')
 def index():
     agent = create_agent()
     return render_template('index.html', agent_name=agent.name,
                            recorders=agent.recorders)
+
+
+@app.route('/agents/<string:name>/<string:state>', methods=['GET', 'POST'])
+def user_view(name, state):
+    recorders = get_recorders('recorder.yml')
+    recorder = [recorder for recorder in recorders if recorder.name == name][0]
+    if state == 'start':
+        recorder.start()
+    if state == 'stop':
+        recorder.stop()
+    return "Done"
 
 
 if __name__ == '__main__':
