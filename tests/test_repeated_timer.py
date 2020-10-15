@@ -4,7 +4,7 @@ import pytest
 
 from Utils.RepeatedTimer import RepeatedTimer
 
-pytest.test_num = 1
+pytest.test_num = 0
 
 
 def increment_num():
