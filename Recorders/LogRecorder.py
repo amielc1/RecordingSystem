@@ -1,4 +1,5 @@
 import glob
+import logging
 import os
 import shutil
 
@@ -14,11 +15,14 @@ class LogRecorder:
         self.extension = extension
         self.timer = rt.RepeatedTimer(self.interval, self.copy_logs)
         self.name = name
+        logging.debug(f"Create {self.name}")
 
     def start(self):
+        logging.debug(f"start {self.name}")
         self.timer.start()
 
     def stop(self):
+        logging.debug(f"stop {self.name}")
         self.timer.stop()
 
     def copy_logs(self):

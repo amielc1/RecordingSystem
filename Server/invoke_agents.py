@@ -2,4 +2,4 @@ import xmlrpc.client as xmlrpclib
 
 proxy = xmlrpclib.ServerProxy('http://localhost:9000')
 print("try to start invoke remote api")
-print(proxy.start())
+agent = proxy.get_agent()

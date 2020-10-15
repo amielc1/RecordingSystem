@@ -8,14 +8,14 @@ from Config.remote_api_config import Remote_api_config
 from Recorders.LogRecorder import LogRecorder
 from Recorders.LogWriter import LogWriter
 
-logging.basicConfig(filename='Application.log', filemode='w',
+logging.basicConfig(filename='RemoteAPIApplication.log', filemode='w',
                     format='[%(asctime)s] {%(filename)s:%(lineno)d} %(levelname)s - %(message)s',
                     level=logging.DEBUG)
 
 logging.debug("------Remote API Application Start ----------")
 
 
-def get_recorders(config_file: str) -> list:
+def create_recorders(config_file: str) -> list:
     log_recorder_cfg = LogRecorderConfig()
     log_recorder_cfg.parse(config_file)
     logging.debug("log_recorder_cfg Done! ")
@@ -34,16 +34,29 @@ def get_recorders(config_file: str) -> list:
     return recorders
 
 
-recorders = get_recorders('Config/recorder.yml')
+def get_agents():
+    return agent
 
+
+def perform_agent(name, method: str):
+    getattr(agent, method)()
+
+
+def perform_recorder(name, method: str):
+    recorder = [recorder for recorder in recorders if recorder.name == name][0]
+    getattr(recorder, method)()
+
+
+recorders = create_recorders('../Config/recorder.yml')
 agent = Agent("Main Agent", recorders)
 
 remote_api_cfg = Remote_api_config()
-remote_api_cfg.parse("Config/server.yml")
+remote_api_cfg.parse("../Config/server.yml")
 logging.debug("remote_api_cfg Done! ")
 
 api_server = RemoteAPIServer(remote_api_cfg.ip, remote_api_cfg.port)
 logging.debug("Create RemoteAPIServer")
-api_server.register_function(agent.start)
-api_server.register_function(agent.stop)
+api_server.register_function(get_agents)
+api_server.register_function(perform_agent)
+api_server.register_function(perform_recorder)
 api_server.start_listen()

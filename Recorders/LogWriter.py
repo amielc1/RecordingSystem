@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 from pathlib import Path
 
@@ -11,11 +12,14 @@ class LogWriter:
         self.filename = filename
         self.timer = rt.RepeatedTimer(1, self.write_log)
         self.name = name
+        logging.debug(f"Create {self.name}")
 
     def start(self):
+        logging.debug(f"start {self.name}")
         self.timer.start()
 
     def stop(self):
+        logging.debug(f"stop {self.name}")
         self.timer.stop()
 
     def write_log(self):
