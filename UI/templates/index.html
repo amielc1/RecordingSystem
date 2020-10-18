@@ -6,8 +6,10 @@
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
     <!-- Bootstrap CSS -->
+    <link href="{{ url_for('static',filename='styles/mainpage.css') }}" rel="stylesheet" type="text/css">
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet">
+
 
     <title>Recording System</title>
 </head>
@@ -44,13 +46,22 @@
                     <td>{{item.name}}</td>
                     <td>Working</td>
                     <td>
-                        <div class="d-inline">
-                            <form class="form-inline" method="post" action="agents/{{item.name}}/start">
-                                <button type="submit" class="btn btn-success">Start</button>
-                            </form>
-                            <form class="form-inline" method="post" action="agents/{{item.name}}/stop">
-                                <button type="submit" class="btn btn-danger">stop</button>
-                            </form>
+                        <div class="btn-inline">
+                            <div class="btn-inline">
+                                <form action="agents/{{item.name}}/start" class="form-inline" method="post">
+                                    <button class="btn btn-success" type="submit">Start</button>
+                                </form>
+                            </div>
+                            <div class="btn-inline">
+                                <form action="agents/{{item.name}}/stop" class="form-inline" method="post">
+                                    <button class="btn btn-danger" type="submit">stop</button>
+                                </form>
+                            </div>
+                            <div class="btn-inline">
+                                <form action="agents/{{item.name}}/Get_files" class="form-inline" method="post">
+                                    <button class="btn btn-primary" type="submit">Get files</button>
+                                </form>
+                            </div>
                         </div>
                     </td>
                 </tr>
