@@ -11,9 +11,9 @@ class LogRecorder:
     def __init__(self, source: str, destination: str, interval: int, extension: str, name: str):
         self.source = source
         self.destination = destination
-        self.interval = interval
+        self.interval = int(interval)
         self.extension = extension
-        self.timer = rt.RepeatedTimer(self.interval, self.copy_logs)
+        self.timer = rt.RepeatingTimer(self.interval, self.copy_logs)
         self.name = name
         logging.debug(f"Create {self.name}")
 

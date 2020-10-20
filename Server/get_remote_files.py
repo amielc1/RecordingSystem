@@ -39,8 +39,8 @@ class get_remote_files:
         if self.transport:
             self.transport.close()
 
-# remote_config = get_remote_files_config()
+# remote_config = Get_remote_files_config()
 # remote_config.parse('../Config/server.yml')
 # remote = get_remote_files(remote_config)
 # remote.connect()
-# remote.get_files('/C:/Users/Me/Downloads/log_files_dir', 'C:/TempA')
+# remote.get_files('C:/dest', 'C:/SSh_dir')

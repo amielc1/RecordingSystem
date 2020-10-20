@@ -2,9 +2,9 @@ log_recorder:
   - source: "C:/TempA"
   - destination: "c:/dest"
   - interval: "2"
-  - extension: "*.log"
+  - extension: "*.*"
 
 log_writer:
-  - destination: "c:/dest"
+  - destination: "C:/TempA"
   - interval: "2"
   - filename: "log_writer.txt"
