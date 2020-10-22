@@ -5,6 +5,7 @@ from Agent.agent import Agent
 from Config.config_manager import ConfigManager
 from Recorders.LogRecorder import LogRecorder
 from Recorders.LogWriter import LogWriter
+from Recorders.screen_recorder import ScreenRecorder
 
 logging.basicConfig(filename='RemoteAPIApplication.log', filemode='w',
                     format='[%(asctime)s] {%(filename)s:%(lineno)d} %(levelname)s - %(message)s',
@@ -28,12 +29,16 @@ def create_recorders() -> list:
                                log_recorder_cfg.get('extension'),
                                'log_recorder')
 
-    logging.debug("Create LogRecorder")
+    logging.debug("LogRecorder Created")
     log_writer = LogWriter(log_writer_cfg.get('destination'), log_writer_cfg.get('interval'),
                            log_writer_cfg.get('filename'),
                            'log_writer')
-    logging.debug("Create LogWriter")
-    recorders = [log_writer, log_recorder]
+    logging.debug("LogWriter Created")
+
+    screen_recorder = ScreenRecorder()
+    logging.debug("Screen Recorder Created")
+
+    recorders = [log_writer, log_recorder]  # , screen_recorder]
     return recorders
 
 
@@ -52,6 +57,11 @@ def perform_recorder(name, method: str):
 
 recorders = create_recorders()
 agent = Agent("Main Agent", recorders)
+
+# agent.start()
+#
+# agent.stop()
+
 
 remote_api_cfg = cfg.get_configuration_of('remote_api_config')
 

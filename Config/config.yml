@@ -9,6 +9,11 @@ log_writer:
   - interval: "2"
   - filename: "log_writer.txt"
 
+screen_recorder:
+  - frame_per_second: 20
+  - filename: 'screen_recorder_out.avi'
+  - codec: 'XVID'
+
 get_remote_files_config:
   - ip: "127.0.0.1"
   - port: 22
