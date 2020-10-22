@@ -3,19 +3,23 @@ from stat import S_ISDIR
 
 import paramiko
 
-from Config.get_remote_files_config import Get_remote_files_config
+from Config.config_manager import ConfigManager
 
 
 class get_remote_files:
 
-    def __init__(self, config: Get_remote_files_config):
-        self.config = config
+    def __init__(self):
+        cfg = ConfigManager().get_configuration_of('get_remote_files_config')
+        self.ip = cfg.get('ip')
+        self.port = int(cfg.get('port'))
+        self.username = cfg.get('username')
+        self.password = cfg.get('password')
         self.transport: paramiko.Transport
         self.sftp: paramiko.SFTPClient
 
     def connect(self):
-        self.transport = paramiko.Transport((self.config.ip, self.config.port))
-        self.transport.connect(None, self.config.username, self.config.password)
+        self.transport = paramiko.Transport((self.ip, self.port))
+        self.transport.connect(None, self.username, self.password)
         self.sftp = paramiko.SFTPClient.from_transport(self.transport)
 
     def isdir(self, path):
@@ -38,9 +42,3 @@ class get_remote_files:
             self.sftp.close()
         if self.transport:
             self.transport.close()
-
-# remote_config = Get_remote_files_config()
-# remote_config.parse('../Config/server.yml')
-# remote = get_remote_files(remote_config)
-# remote.connect()
-# remote.get_files('C:/dest', 'C:/SSh_dir')

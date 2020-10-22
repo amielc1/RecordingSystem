@@ -1,0 +1,20 @@
+log_recorder:
+  - source: "C:/TempA"
+  - destination: "c:/dest"
+  - interval: "2"
+  - extension: "*.*"
+
+log_writer:
+  - destination: "C:/TempA"
+  - interval: "2"
+  - filename: "log_writer.txt"
+
+get_remote_files_config:
+  - ip: "127.0.0.1"
+  - port: 22
+  - username: "Me"
+  - password: ""
+
+remote_api_config:
+  - ip: "127.0.0.1"
+  - port: 9000

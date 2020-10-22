@@ -3,14 +3,12 @@ import xmlrpc.client as xmlrpclib
 
 from flask import Flask, render_template, redirect, url_for
 
-from Config.get_remote_files_config import Get_remote_files_config
 from Server.get_remote_files import get_remote_files
 
 app = Flask('Recording System')
 global agent
 
 proxy = xmlrpclib.ServerProxy('http://localhost:9000')
-
 
 @app.route('/')
 def index():
@@ -27,9 +25,7 @@ def user_view(name, state):
 
 @app.route('/get_remote_files', methods=['POST'])
 def get_files():
-    remote_config = Get_remote_files_config()
-    remote_config.parse('../Config/server.yml')
-    remote = get_remote_files(remote_config)
+    remote = get_remote_files()
     remote.connect()
     remote.get_files('C:/dest', 'C:/SSh_dir')
     return redirect(url_for('index'))
